@@ -1,0 +1,39 @@
+NEXO TECNOLOGIA — Frontend-Dev (Turma 1)
+=========================================
+
+O que tem nesta pasta:
+
+1-quadro-de-chamados.html
+  Abra este arquivo no navegador. E o quadro interativo da equipe:
+  mostra o time, os cargos, os clientes e os 5 chamados ja carregados
+  no "Aberto". Arraste os cards entre as colunas conforme o trabalho
+  avanca. O(a) Tech Lead pode abrir novos chamados pelo formulario
+  no topo da pagina.
+
+2-dossie-da-equipe.pdf
+  Versao para impressao de tudo isso: equipe e cargos, carteira de
+  clientes da NEXO, e o detalhamento dos 5 desafios com a descricao
+  completa e o criterio de "pronto" (Definition of Done) de cada um.
+
+3-normas-da-empresa.pdf
+  Regras de conduta validas para todos os colaboradores da NEXO
+  durante o expediente.
+
+4-organograma-de-cargos.pdf
+  A hierarquia geral de cargos da empresa, do Estagiario(a) ao
+  Diretor(a) Executivo(a).
+
+5-sistema-nexo/
+  O sistema REAL da empresa, ja pronto e funcionando (backend Java 20
+  + Spring Boot, frontend React + TypeScript), com o modulo de
+  cadastro/login de usuarios. Usem este codigo como base/referencia
+  para resolver os chamados do quadro acima — o chamado 1 (cadastro
+  de usuarios) ja bate com o que esta implementado aqui; os outros
+  4 chamados (de outros clientes) sao para implementar seguindo o
+  mesmo padrao usado neste projeto.
+  Veja 5-sistema-nexo/README.md para instrucoes de como rodar no
+  VS Code (backend: mvn spring-boot:run · frontend: npm install
+  && npm run dev).
+
+Bom trabalho!
+NEXO Tecnologia

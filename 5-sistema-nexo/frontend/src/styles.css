@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Paleta extraída do Figma "Fluxo de Cadastro - VarejoFácil" */
+  --primary: #5b4fe8;
+  --primary-hover: #4a3fd6;
+  --ink: #1a1a2e;
+  --ink-dim: #4b4b57;
+  --line: #c9c9cf;
+  --bg: #dcdcdc;
+  --panel: #ffffff;
+  --card-bg: #c9c9c9;
+  --header-dark: #1c1c1f;
+  --header-light: #dcdcdc;
+  --green: #4caf7d;
+  --green-icon-bg: #7bd99a;
+  --green-icon: #0b5d34;
+  --red: #c22e45;
+  --red-bg: #eeacb6;
+  --red-border: #c22e45;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Poppins', sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Barra preta superior, como nas telas internas do Figma */
+.app::before {
+  content: '';
+}
+
+.topbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 40px;
+  background: var(--header-light);
+  border-bottom: 1px solid #9d9d9d;
+}
+
+.topbar-inner {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wordmark {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.wordmark .accent {
+  color: var(--ink);
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--ink-dim);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 4px;
+  border-bottom: 2px solid transparent;
+}
+
+nav a.active {
+  color: var(--primary);
+  font-weight: 600;
+  border-bottom-color: var(--primary);
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  padding: 40px 44px;
+  width: 100%;
+  max-width: 440px;
+  height: fit-content;
+}
+
+.card-wide {
+  max-width: 760px;
+}
+
+.card h1 {
+  margin: 0 0 6px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0 0 26px 0;
+  color: var(--ink-dim);
+  font-size: 14px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+label.field-error {
+  color: var(--red);
+}
+
+input {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  padding: 12px 14px;
+  border: 1.5px solid #ffffff;
+  border-radius: 8px;
+  color: var(--ink);
+  background: #ffffff;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+input.input-error {
+  border-color: var(--red-border);
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 20px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.form-footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ink-dim);
+}
+
+.form-footer a,
+.link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.alert {
+  font-size: 13.5px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.alert-error {
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid var(--red-border);
+}
+
+.alert-success {
+  background: #eaf7ef;
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+.alert-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Tela de sucesso (checkmark grande, como no Figma) */
+.success-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.success-icon {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--green-icon-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.success-view h1 {
+  color: var(--ink);
+  font-size: 26px;
+}
+
+.success-view .subtitle {
+  margin-bottom: 8px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.list-header h1 {
+  text-align: left;
+}
+
+.list-header .subtitle {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.empty {
+  color: var(--ink-dim);
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13.5px;
+}
+
+th {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 16px 20px;
+  }
+
+  .topbar-inner {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  nav {
+    gap: 18px;
+  }
+
+  .content {
+    padding: 32px 16px;
+  }
+
+  .card {
+    padding: 28px 24px;
+  }
+
+  .list-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

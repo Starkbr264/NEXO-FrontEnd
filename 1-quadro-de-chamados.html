@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>NEXO — Frontend Dev</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#f4f5f6; --panel:#ffffff; --ink:#14181f; --ink-dim:#6b7280; --line:#dfe2e6;
+  --accent:#0e8fa8;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Space Grotesk', sans-serif;
+  padding-bottom:60px;
+}
+.mono{ font-family:'JetBrains Mono', monospace; }
+
+header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:30px 44px; background:var(--panel); border-bottom:1.5px solid var(--line);
+  border-top:6px solid var(--accent);
+  position:sticky; top:0; z-index:10;
+}
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand .word{ font-weight:700; font-size:18px; letter-spacing:0.5px; }
+.brand .word span{ color:var(--accent); }
+header .teaminfo{ text-align:right; }
+header .tname{ font-weight:700; font-size:20px; }
+header .tcode{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--accent); letter-spacing:2px; margin-top:2px; }
+
+.section-head{ padding:34px 44px 8px 44px; }
+.section-head .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.section-head h2{ margin:0; font-size:23px; }
+.section-head p{ margin:8px 0 0 0; color:var(--ink-dim); font-size:14px; max-width:660px; }
+
+#roster{
+  margin:14px 44px 0 44px;
+  background:var(--panel); border:1.5px solid var(--line); border-radius:10px;
+  padding:8px; display:flex; flex-wrap:wrap; gap:8px;
+}
+.member{
+  display:flex; align-items:center; gap:8px; background:#f7f8f9; border-radius:7px;
+  padding:8px 12px 8px 8px; font-size:13px;
+}
+.member .avatar{
+  width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff;
+  font-family:'JetBrains Mono', monospace; font-size:9.5px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.member .cargo{ font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:0.5px; text-transform:uppercase; color:var(--ink-dim); margin-left:4px; }
+.member.lead{ border:1.3px solid var(--accent); background:#fff; }
+.member.lead .cargo{ color:var(--accent); font-weight:700; }
+
+#clients{
+  margin:14px 44px 0 44px;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:10px;
+}
+.client{
+  background:var(--panel); border:1.3px solid var(--line); border-radius:8px; padding:12px 14px;
+}
+.client .cname{ font-weight:700; font-size:13.5px; }
+.client .csys{ font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--ink-dim); letter-spacing:0.5px; margin-top:3px; }
+
+#leadertool{
+  margin:22px 44px 0 44px;
+  background:#fff; border:1.5px dashed var(--accent); border-radius:10px;
+  padding:16px 20px;
+}
+#leadertool .lt-head{ display:flex; justify-content:space-between; align-items:center; cursor:pointer; }
+#leadertool .lt-title{ font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); font-weight:600; }
+#leadertool .lt-toggle{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-dim); }
+#leadertool form{ display:none; margin-top:14px; flex-direction:column; gap:10px; }
+#leadertool form.open{ display:flex; }
+#leadertool input, #leadertool textarea, #leadertool select{
+  font-family:'Space Grotesk', sans-serif; font-size:13px; padding:9px 11px;
+  border:1.3px solid var(--line); border-radius:6px; width:100%;
+}
+#leadertool textarea{ resize:vertical; min-height:50px; }
+#leadertool button{
+  align-self:flex-start; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:1px; text-transform:uppercase;
+  background:var(--accent); color:#fff; border:none; border-radius:7px; padding:10px 18px; cursor:pointer; font-weight:600;
+}
+
+#board{
+  margin:22px 44px 0 44px;
+  background:var(--panel); border:1.5px solid var(--line); border-radius:12px; overflow:hidden;
+}
+.columns{ display:grid; grid-template-columns:1fr 1fr 1fr; }
+.col{ padding:16px 14px 26px 14px; border-right:1.3px dashed var(--line); min-height:260px; }
+.col:last-child{ border-right:none; }
+.col .clabel{
+  font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--ink-dim); margin-bottom:12px; display:flex; align-items:center; gap:7px;
+}
+.col .clabel .cdot{ width:7px; height:7px; border-radius:50%; }
+.col[data-col="aberto"] .clabel .cdot{ background:#c17a00; }
+.col[data-col="andamento"] .clabel .cdot{ background:var(--accent); }
+.col[data-col="concluido"] .clabel .cdot{ background:#2f9e5e; }
+.col.dragover{ background:#f7fbfb; }
+
+.ticket{
+  background:#fff; border:1.5px solid var(--line); border-radius:8px;
+  padding:12px 14px; cursor:grab; user-select:none; margin-bottom:10px;
+  box-shadow:0 1px 2px rgba(20,24,31,0.04);
+}
+.ticket.dragging{ opacity:0.4; }
+.ticket .tclient{
+  display:inline-block; font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase;
+  color:var(--accent); background:#f7f8f9; border-radius:10px; padding:3px 9px; margin-bottom:8px;
+}
+.ticket .ttitle{ font-weight:700; font-size:13.5px; margin-bottom:6px; }
+.ticket .tdesc{ font-size:12px; color:var(--ink-dim); line-height:1.5; margin-bottom:8px; }
+.ticket .tdod{ font-size:11px; color:var(--ink); background:#f7f8f9; border-radius:5px; padding:7px 9px; line-height:1.5; }
+.ticket .tassignee{
+  margin-top:8px; display:inline-flex; align-items:center; gap:6px;
+  font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--accent); letter-spacing:0.5px;
+}
+.ticket .tassignee .adot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+
+footer{
+  text-align:center; padding:30px; font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--ink-dim); letter-spacing:1px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg width="22" height="22" viewBox="0 0 130 130"><line x1="30" y1="100" x2="30" y2="30" stroke="#0e8fa8" stroke-width="6"/><line x1="100" y1="100" x2="100" y2="30" stroke="#0e8fa8" stroke-width="6"/><line x1="30" y1="30" x2="100" y2="100" stroke="#14181f" stroke-width="6"/><circle cx="30" cy="30" r="10" fill="#fff" stroke="#0e8fa8" stroke-width="5"/><circle cx="30" cy="100" r="10" fill="#0e8fa8"/><circle cx="100" cy="30" r="10" fill="#0e8fa8"/><circle cx="100" cy="100" r="10" fill="#fff" stroke="#0e8fa8" stroke-width="5"/></svg>
+    <div class="word">NE<span>X</span>O</div>
+  </div>
+  <div class="teaminfo">
+    <div class="tname">Frontend Dev</div>
+    <div class="tcode mono">FE-04 · Quadro individual</div>
+  </div>
+</header>
+
+<div class="section-head">
+  <div class="eyebrow">Sua equipe</div>
+  <h2>Colaboradores e cargos</h2>
+  <p>O(a) Tech Lead é responsável por distribuir os chamados abaixo em tarefas menores para o time.</p>
+</div>
+<div id="roster"><div class="member lead"><span class="avatar">PS</span>Pietro de Almeida Alves Silva<span class="cargo">Tech Lead</span></div><div class="member"><span class="avatar">TA</span>Thávine Emanuelle Ferreira Aragão<span class="cargo">Pleno</span></div><div class="member"><span class="avatar">EL</span>Enzo Aragão Lages<span class="cargo">Pleno</span></div><div class="member"><span class="avatar">JB</span>João Pedro Rodrigues Brandão<span class="cargo">Júnior</span></div><div class="member"><span class="avatar">AS</span>Alex Eduardo Oliveira dos Santos<span class="cargo">Júnior</span></div><div class="member"><span class="avatar">JS</span>João Rikelme Ribeiro da Silva<span class="cargo">Estagiário(a)</span></div><div class="member"><span class="avatar">DS</span>Dawid Lima Souto<span class="cargo">Estagiário(a)</span></div></div>
+
+<div class="section-head">
+  <div class="eyebrow">Onde os chamados se encaixam</div>
+  <h2>Sistemas que a NEXO mantém</h2>
+  <p>Cada chamado abaixo indica de onde ele vem e o que afeta dentro do que a empresa mantém.</p>
+</div>
+<div id="clients"><div class="client"><div class="cname">VarejoFácil</div><div class="csys">E-commerce</div></div><div class="client"><div class="cname">Clínica Vitalis</div><div class="csys">Agendamento médico</div></div><div class="client"><div class="cname">RotaLog</div><div class="csys">Rastreamento de entregas</div></div><div class="client"><div class="cname">EduPlus</div><div class="csys">Plataforma de cursos online</div></div><div class="client"><div class="cname">BancoNova</div><div class="csys">Aplicativo financeiro</div></div></div>
+
+<div id="leadertool">
+  <div class="lt-head" id="lt-toggle-btn">
+    <div class="lt-title">Ferramenta do Tech Lead — abrir novo chamado</div>
+    <div class="lt-toggle">clique para abrir</div>
+  </div>
+  <form id="lt-form">
+    <input type="text" id="lt-client" placeholder="Cliente / sistema (ex: VarejoFacil - E-commerce)">
+    <input type="text" id="lt-title" placeholder="Titulo da tarefa" required>
+    <textarea id="lt-desc" placeholder="Descricao curta da tarefa"></textarea>
+    <select id="lt-assignee"><option value="">Sem responsavel definido</option><option value="Pietro de Almeida Alves Silva">Pietro de Almeida Alves Silva (Tech Lead)</option><option value="Thávine Emanuelle Ferreira Aragão">Thávine Emanuelle Ferreira Aragão (Pleno)</option><option value="Enzo Aragão Lages">Enzo Aragão Lages (Pleno)</option><option value="João Pedro Rodrigues Brandão">João Pedro Rodrigues Brandão (Júnior)</option><option value="Alex Eduardo Oliveira dos Santos">Alex Eduardo Oliveira dos Santos (Júnior)</option><option value="João Rikelme Ribeiro da Silva">João Rikelme Ribeiro da Silva (Estagiário(a))</option><option value="Dawid Lima Souto">Dawid Lima Souto (Estagiário(a))</option></select>
+    <button type="submit">Adicionar ao quadro</button>
+  </form>
+</div>
+
+<div class="section-head">
+  <div class="eyebrow">Quadro de chamados</div>
+  <h2>Frontend Dev</h2>
+  <p>Arraste os cards entre as colunas conforme a tarefa avança. O(a) Tech Lead pode abrir novos chamados a qualquer momento.</p>
+</div>
+<div id="board">
+  <div class="columns">
+    <div class="col" data-col="aberto"><div class="clabel"><span class="cdot"></span>Aberto</div></div>
+    <div class="col" data-col="andamento"><div class="clabel"><span class="cdot"></span>Em Andamento</div></div>
+    <div class="col" data-col="concluido"><div class="clabel"><span class="cdot"></span>Concluído</div></div>
+  </div>
+</div>
+
+<footer>NEXO Tecnologia · Frontend Dev · SENAC DF</footer>
+
+<script>
+function makeTicket(client, title, desc, dod, assignee){
+  const t = document.createElement("div");
+  t.className = "ticket";
+  t.draggable = true;
+  t.innerHTML = `
+    ${client ? `<div class="tclient">${client}</div>` : ""}
+    <div class="ttitle">${title}</div>
+    <div class="tdesc">${desc}</div>
+    ${dod ? `<div class="tdod">${dod}</div>` : ""}
+    ${assignee ? `<div class="tassignee"><span class="adot"></span>${assignee}</div>` : ""}
+  `;
+  t.addEventListener("dragstart", ()=> t.classList.add("dragging"));
+  t.addEventListener("dragend", ()=> t.classList.remove("dragging"));
+  return t;
+}
+
+document.querySelectorAll(".col").forEach(col=>{
+  col.addEventListener("dragover", e=>{ e.preventDefault(); col.classList.add("dragover"); });
+  col.addEventListener("dragleave", ()=> col.classList.remove("dragover"));
+  col.addEventListener("drop", e=>{
+    e.preventDefault();
+    col.classList.remove("dragover");
+    const dragging = document.querySelector(".dragging");
+    if(dragging) col.appendChild(dragging);
+  });
+});
+
+const seedTickets = [{"client": "VarejoFácil — E-commerce", "title": "Tela de login", "desc": "Desenhem a interface de login com campos de e-mail e senha, mensagens de erro visuais e botão que chamaria a API do time Backend.", "dod": "<b>Pronto quando:</b> os campos obrigatórios estão marcados, existe mensagem para erro de login, e o layout funciona em tela pequena."}, {"client": "Clínica Vitalis — Agendamento", "title": "Tela de agendamento com calendário", "desc": "Criem a tela onde o paciente escolhe data e horário da consulta em um calendário visual, mostrando quais horários já estão ocupados.", "dod": "<b>Pronto quando:</b> o calendário diferencia horários livres e ocupados, e o paciente não consegue selecionar um horário ocupado."}, {"client": "RotaLog — Rastreamento", "title": "Mapa não atualiza localização em tempo real", "desc": "Clientes reclamam que o mapa do pedido fica parado e não atualiza sozinho. Proponham como resolver isso na tela.", "dod": "<b>Pronto quando:</b> existe uma proposta de atualização automática (ex: a cada X segundos) e um indicador visual de 'atualizando'."}, {"client": "EduPlus — Cursos online", "title": "Barra de progresso do curso", "desc": "Criem uma barra de progresso na tela do aluno mostrando quantos módulos do curso já foram concluídos.", "dod": "<b>Pronto quando:</b> a barra reflete o progresso real e existe um estado visual para curso 100% concluído."}, {"client": "BancoNova — Fintech", "title": "Extrato quebra em celulares pequenos", "desc": "A tela de extrato bancário está cortando valores em celulares com tela pequena. Ajustem o layout para funcionar em qualquer tamanho.", "dod": "<b>Pronto quando:</b> nenhum valor ou texto fica cortado nas larguras de tela testadas."}];
+const abertoCol = document.querySelector('.col[data-col="aberto"]');
+seedTickets.forEach(tk=>{
+  abertoCol.appendChild(makeTicket(tk.client, tk.title, tk.desc, tk.dod, null));
+});
+
+document.getElementById("lt-toggle-btn").addEventListener("click", ()=>{
+  document.getElementById("lt-form").classList.toggle("open");
+});
+document.getElementById("lt-form").addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const client = document.getElementById("lt-client").value.trim();
+  const title = document.getElementById("lt-title").value.trim();
+  const desc = document.getElementById("lt-desc").value.trim();
+  const assignee = document.getElementById("lt-assignee").value;
+  if(!title) return;
+  abertoCol.appendChild(makeTicket(client, title, desc || "Sem descricao adicional.", "", assignee));
+  e.target.reset();
+});
+</script>
+</body>
+</html>
