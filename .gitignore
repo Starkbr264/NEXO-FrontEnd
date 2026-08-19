@@ -1,0 +1,29 @@
+# Maven/Java
+target/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+
+# Database files
+data/*.mv.db
+data/*.trace.db
+data/*.db
+
+# Logs
+*.log
+
+# Node
+banconova-frontend/node_modules/
+node_modules/
+
+# Build outputs
+/dist
+/.cache
+
+# OS
+.DS_Store
+Thumbs.db

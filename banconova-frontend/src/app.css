@@ -1,0 +1,267 @@
+.pagina {
+  min-height: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+/* --- Topo --- */
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.topo__marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topo__marca h1 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.topo__marca p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.botao-fantasma {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.botao-fantasma:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.botao-fantasma:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* --- Layout principal --- */
+
+.conteudo {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 780px) {
+  .conteudo {
+    grid-template-columns: 1fr;
+  }
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.texto-muted {
+  color: var(--text-faint);
+  font-size: 14px;
+}
+
+/* --- Cartões de conta --- */
+
+.grade-contas {
+  display: grid;
+  gap: 14px;
+}
+
+.conta-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: border-color 0.5s ease, background 0.5s ease;
+}
+
+.conta-card--pulse {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+
+.conta-card__topo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.conta-card__titular {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.conta-card__id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.conta-card__saldo {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.conta-card__saldo--negativo {
+  color: var(--danger);
+}
+
+/* --- Painel de transferência --- */
+
+.painel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 24px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.campo select,
+.campo input {
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 11px 12px;
+  font-size: 14px;
+  font-family: var(--font-body);
+}
+
+.campo select:focus,
+.campo input:focus {
+  border-color: var(--accent);
+}
+
+.campo-valor {
+  display: flex;
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+}
+
+.campo-valor:focus-within {
+  border-color: var(--accent);
+}
+
+.campo-valor span {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.campo-valor input {
+  border: none;
+  background: transparent;
+  padding: 11px 8px;
+  font-family: var(--font-mono);
+  width: 100%;
+}
+
+.campo-valor input:focus {
+  outline: none;
+}
+
+.aviso-inline {
+  margin: -8px 0 0;
+  font-size: 12.5px;
+  color: var(--danger);
+}
+
+.botao-principal {
+  background: var(--accent);
+  color: #0f0b1e;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.botao-principal:hover:not(:disabled) {
+  background: var(--accent-dim);
+}
+
+.botao-principal:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.botao-principal:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.aviso {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.aviso--erro {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.aviso--sucesso {
+  background: var(--success-bg);
+  color: var(--accent);
+}
+
+.aviso code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}

@@ -1,0 +1,72 @@
+:root {
+  color-scheme: dark;
+
+  /* --- Paleta BancoNova: "nova" = explosão de luz num céu profundo --- */
+  --bg: #0f0b1e;
+  --bg-glow: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200, 255, 77, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(232, 185, 74, 0.06), transparent);
+  --surface: #171029;
+  --surface-2: #1e1638;
+  --border: rgba(243, 239, 250, 0.09);
+  --border-strong: rgba(243, 239, 250, 0.16);
+
+  --text: #f3effa;
+  --text-muted: #a79fc2;
+  --text-faint: #6f6790;
+
+  --accent: #c8ff4d;
+  --accent-dim: #9fd63a;
+  --gold: #e8b94a;
+  --danger: #ff6b6b;
+  --danger-bg: rgba(255, 107, 107, 0.12);
+  --success-bg: rgba(200, 255, 77, 0.1);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: var(--bg-glow);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: #0f0b1e;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
